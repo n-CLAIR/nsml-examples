@@ -56,7 +56,7 @@ AL01300657:nsml-examples user$
 AL01300657:nsml-examples user$ export PATH=$PATH:`pwd`
 
 # nsml에 로그인을합니다
-AL01300657:nsml-examples user$ ./nsml login
+AL01300657:nsml-examples user$ nsml login
 2018/05/16 18:12:54 connecting to alpha.cli.nsml.navercorp.com:18553
 2018/05/16 18:12:55 there is no update
 GitHub Username: rkdls
@@ -64,7 +64,7 @@ GitHub Password: **********
 2018/05/16 18:13:05 Welcome to NSML!
 
 # dataset을 확인합니다
-AL01300657:nsml-examples user$ ./nsml dataset ls
+AL01300657:nsml-examples user$ nsml dataset ls
 Name       Size      Last Modified    Author       Description          Tag
 ---------  --------  ---------------  -----------  -------------------  --------
 alpha-kin  11.9 MB   a day ago        rkdls        example of kin data  #example
@@ -72,7 +72,7 @@ mnist_new  52.41 MB  a day ago        JinwoongKim
 AL01300657:nsml-examples user$
 
 # 등록된 dataset을 이용해서 main.py를 nsml에서 훈련시켜보겠습니다.
-AL01300657:nsml-examples user$ ./nsml run -d alpha-kin -e examples/kin/example/main.py
+AL01300657:nsml-examples user$ nsml run -d alpha-kin -e examples/kin/example/main.py
 2018/05/16 18:13:59 dataset.py 3.5 KiB
 2018/05/16 18:13:59 kor_char_parser.py 3.8 KiB
 2018/05/16 18:13:59 main.py 7.6 KiB
@@ -82,14 +82,14 @@ Session rkdls/alpha-kin/16 is started
 
 
 # 세션이 잘동작중인지 확인합니다.( -a : 종료된것도 포함합니다)
-AL01300657:nsml-examples user$ ./nsml ps
+AL01300657:nsml-examples user$ nsml ps
 Name                Created      Args     Status    Summary                                    Description
 ------------------  -----------  -------  --------  -----------------------------------------  -------------
 rkdls/alpha-kin/16  seconds ago  main.py  Running   epoch=1, epoch_total=10, train/loss=0.666
 
 
 # train이 어느정도 진행되었으면 nsml.save(epoch)으로 저장된 checkpoint를 확인해봅니다. (학습 중간중간에 저장된 model)
-AL01300657:nsml-examples user$ ./nsml model ls rkdls/alpha-kin/16
+AL01300657:nsml-examples user$ nsml model ls rkdls/alpha-kin/16
 Checkpoint    Last Modified    Elapsed    Summary
 ------------  ---------------  ---------  --------------------------------------------------------------
 0             seconds ago      0.293      train/loss=0.6852216747269702, step=0, epoch=0, epoch_total=10
@@ -102,13 +102,13 @@ Checkpoint    Last Modified    Elapsed    Summary
 7             just now         4.505      train/loss=0.6230241398313152, step=7, epoch=7, epoch_total=10
 
 # submit 명령어를 이용해서 leaderboard에 나의 점수를 올려봅니다.
-AL01300657:nsml-examples user$ ./nsml submit rkdls/alpha-kin/16 7
+AL01300657:nsml-examples user$ nsml submit rkdls/alpha-kin/16 7
 ....................
 Score : 0.663592134604
 done
 
 # 내가 submit한 모델의 스코어가 어느정도인지 확인해봅니다.
-AL01300657:nsml-examples user$ ./nsml dataset board alpha-kin
+AL01300657:nsml-examples user$ nsml dataset board alpha-kin
 Owner    Score           Submitted       Session             Model    Args
 -------  --------------  --------------  ------------------  -------  -------
 rkdls    0.663592134604  a minute ago    rkdls/alpha-kin/16  7        main.py
